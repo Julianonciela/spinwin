@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Spin & Win — Print Card</title>
+  <style>
+    @page { size: A6 portrait; margin: 6mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f3f3f3;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 24px 0;
+    }
+    .card {
+      width: 105mm;
+      height: 148mm;
+      background: linear-gradient(160deg, #0c0820 0%, #060410 60%, #1a0d2c 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 10mm 8mm;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -40mm; right: -40mm;
+      width: 90mm; height: 90mm;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff00bf 0%, transparent 70%);
+      opacity: 0.45;
+      filter: blur(20px);
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -40mm; left: -40mm;
+      width: 90mm; height: 90mm;
+      border-radius: 50%;
+      background: radial-gradient(circle, #11d3ff 0%, transparent 70%);
+      opacity: 0.35;
+      filter: blur(20px);
+    }
+    .head, .qr-block, .foot { position: relative; z-index: 2; text-align: center; }
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(255,0,191,0.14);
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin: 8px 0 0;
+      line-height: 1;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #fff, #d8dee9);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+    h1 .amp {
+      background: linear-gradient(180deg, #ff00bf, #ffd166);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      margin: 0 4px;
+    }
+    .sub {
+      margin: 4px 0 0;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #cfd5ea;
+    }
+    .qr-block {
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px;
+      margin: 6mm 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .qr-block img { display: block; width: 60mm; height: 60mm; }
+    .scan {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 4mm;
+      color: #fff;
+    }
+    .steps {
+      font-size: 10px;
+      color: #b6bcd0;
+      line-height: 1.5;
+      margin: 2mm 0 0;
+    }
+    .steps b { color: #fff; font-weight: 600; }
+    .driver-line {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ff5cd6;
+      margin-top: 4mm;
+      font-weight: 700;
+    }
+    .footnote {
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6a708a;
+      margin-top: 2mm;
+    }
+    .controls {
+      max-width: 105mm;
+      margin: 14px 0 0;
+      text-align: center;
+      font-family: -apple-system, sans-serif;
+      color: #333;
+    }
+    .controls button {
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .controls { display: none; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <span class="pill">Lyft Premium XL</span>
+      <h1>Spin<span class="amp">&amp;</span>Win</h1>
+      <p class="sub">Every ride deserves a reward</p>
+    </div>
+
+    <div class="qr-block">
+      <img src="qr-juliano.png" alt="Scan to play" />
+    </div>
+
+    <div class="foot">
+      <div class="scan">Scan to spin · Win a thank-you gift</div>
+      <p class="steps">
+        <b>1.</b> Open your camera &nbsp;·&nbsp; <b>2.</b> Scan this code<br/>
+        <b>3.</b> Tap the wheel &nbsp;·&nbsp; <b>4.</b> Show the prize to your driver
+      </p>
+      <div class="driver-line">Juliano · Bakersfield, CA</div>
+      <p class="footnote">One spin per rider</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="window.print()">Print this card</button>
+  </div>
+</body>
+</html>
