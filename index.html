@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Spin & Win — Premium Ride Reward</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#05060a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Spin & Win" />
+  <meta name="description" content="A surprise reward for great passengers — spin and win a thank-you gift." />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="bg-orbs" aria-hidden="true"></div>
+
+    <!-- HOME SCREEN -->
+    <section id="screen-home" class="screen active fade-in">
+      <header class="brand-strip">
+        <span class="brand-dot"></span>
+        <span id="brand-name">JULIANO</span>
+        <span class="brand-dot"></span>
+        <span id="brand-service">Lyft Premium XL</span>
+      </header>
+
+      <div class="title-block">
+        <h1 class="title">SPIN<span class="amp">&amp;</span>WIN</h1>
+        <p id="tagline" class="subtitle">EVERY RIDE DESERVES A REWARD</p>
+      </div>
+
+      <p id="thanks-line" class="thanks">Thank you for riding with me — <strong id="welcome-driver">Juliano</strong></p>
+
+      <button id="spin-cta" class="spin-cta" aria-label="Tap the steering wheel to spin">
+        <span class="pulse" aria-hidden="true"></span>
+        <svg class="steering-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="rim-grad" cx="50%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#cfd5ea" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="#5a607a" stop-opacity="0.85" />
+            </radialGradient>
+            <radialGradient id="hub-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff5cd6" />
+              <stop offset="100%" stop-color="#a30077" />
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="86" fill="none" stroke="url(#rim-grad)" stroke-width="14" />
+          <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2" stroke-dasharray="2 4" opacity="0.3" />
+          <circle cx="100" cy="100" r="22" fill="url(#hub-grad)" />
+          <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+          <rect x="96" y="36"  width="8" height="42" rx="3" fill="url(#rim-grad)" />
+          <rect x="96" y="122" width="8" height="42" rx="3" fill="url(#rim-grad)" />
+          <rect x="36" y="96"  width="42" height="8" rx="3" fill="url(#rim-grad)" />
+          <rect x="122" y="96" width="42" height="8" rx="3" fill="url(#rim-grad)" />
+          <circle cx="100" cy="100" r="6" fill="#fff" opacity="0.9" />
+        </svg>
+        <span class="label">TAP TO SPIN</span>
+      </button>
+
+      <footer class="footer-tag">
+        <span class="lyft-strip" id="footer-service">Lyft Premium XL · Bakersfield, CA</span>
+        <span>One spin per rider · Show the prize to your driver</span>
+      </footer>
+    </section>
+
+    <!-- WHEEL SCREEN -->
+    <section id="screen-wheel" class="screen">
+      <header class="brand-strip">
+        <span class="brand-dot"></span>
+        <span>SPINNING</span>
+        <span class="brand-dot"></span>
+      </header>
+
+      <div class="wheel-shell">
+        <div class="wheel-pointer" aria-hidden="true">
+          <svg viewBox="0 0 36 48">
+            <defs>
+              <linearGradient id="ptr" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fff" />
+                <stop offset="100%" stop-color="#ff00bf" />
+              </linearGradient>
+            </defs>
+            <path d="M18 48 L2 6 Q18 0 34 6 Z" fill="url(#ptr)" stroke="#fff" stroke-width="1.5" />
+            <circle cx="18" cy="10" r="3" fill="#05060a" />
+          </svg>
+        </div>
+        <div class="wheel-svg-wrap">
+          <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 400 400" aria-hidden="true"></svg>
+          <div class="wheel-hub" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="86" fill="none" stroke="#cfd5ea" stroke-width="10" opacity="0.85" />
+              <circle cx="100" cy="100" r="22" fill="#ff00bf" />
+              <rect x="96" y="36"  width="8" height="42" rx="3" fill="#cfd5ea" />
+              <rect x="96" y="122" width="8" height="42" rx="3" fill="#cfd5ea" />
+              <rect x="36" y="96"  width="42" height="8" rx="3" fill="#cfd5ea" />
+              <rect x="122" y="96" width="42" height="8" rx="3" fill="#cfd5ea" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="wheel-foot">
+        <span class="hint" id="wheel-hint">GOOD LUCK…</span>
+        <div class="loader" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="screen-result" class="screen">
+      <header class="brand-strip">
+        <span class="brand-dot"></span>
+        <span>YOUR PRIZE</span>
+        <span class="brand-dot"></span>
+      </header>
+
+      <div class="result-stage">
+        <div id="result-card" class="result-card">
+          <span id="replay-tag" class="replay-tag" style="display:none">YOU ALREADY PLAYED</span>
+          <span id="tier-badge" class="tier-badge" data-tier="bronze">BRONZE</span>
+          <h2 id="prize-name" class="prize-name" data-tier="bronze">PRIZE</h2>
+          <p id="prize-meta" class="prize-meta">WON · 00:00</p>
+          <div class="prize-instructions">
+            <strong>Show this screen to your driver</strong> when you arrive to claim your reward.
+          </div>
+          <p id="driver-greeting" class="driver-greeting">Thank you for riding</p>
+        </div>
+      </div>
+
+      <footer class="footer-tag">
+        <span>Premium ride · Premium thank-you</span>
+      </footer>
+    </section>
+
+    <!-- ADMIN OVERLAY (PIN-protected) -->
+    <div id="admin-overlay" class="admin-overlay" role="dialog" aria-hidden="true">
+      <div class="admin-panel">
+        <h2>DRIVER PANEL</h2>
+        <div class="admin-row">
+          <label for="admin-pin">PIN</label>
+          <input id="admin-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="• • • •" />
+        </div>
+        <div class="admin-actions">
+          <button id="admin-stats-btn">STATS</button>
+          <button id="admin-toggle-jackpot">JACKPOT ON/OFF</button>
+        </div>
+        <div id="admin-stats-block" class="admin-stats" style="display:none">
+          <div><b id="stat-today">0</b><span>today</span></div>
+          <div><b id="stat-total">0</b><span>total</span></div>
+          <div><b id="stat-jack">0</b><span>jackpots</span></div>
+        </div>
+        <div class="admin-actions">
+          <button id="admin-clear-local">CLEAR LOCAL CACHE</button>
+          <button id="admin-close" class="primary">CLOSE</button>
+        </div>
+        <p style="font-size:11px;color:var(--ink-mute);text-align:center;letter-spacing:.16em;text-transform:uppercase;">
+          Tap top-right corner 5× to open
+        </p>
+      </div>
+    </div>
+
+    <div id="hidden-tap" class="hidden-tap-zone" aria-hidden="true"></div>
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
+    <div id="toast" class="error-toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
