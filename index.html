@@ -22,48 +22,62 @@
 
     <!-- HOME SCREEN -->
     <section id="screen-home" class="screen active fade-in">
-      <header class="brand-strip">
+      <header class="brand-strip home-header">
         <span class="brand-dot"></span>
         <span id="brand-name">JULIANO</span>
         <span class="brand-dot"></span>
         <span id="brand-service">Lyft Premium XL</span>
       </header>
 
-      <div class="title-block">
-        <h1 class="title">SPIN<span class="amp">&amp;</span>WIN</h1>
-        <p id="tagline" class="subtitle">EVERY RIDE DESERVES A REWARD</p>
+      <div class="home-center">
+        <div class="title-block">
+          <h1 class="title">SPIN<span class="amp">&amp;</span>WIN</h1>
+          <p id="tagline" class="subtitle">EVERY RIDE DESERVES A REWARD</p>
+        </div>
+
+        <p id="thanks-line" class="thanks">Thank you for riding with me — <strong id="welcome-driver">Juliano</strong></p>
+
+        <div class="spin-cta-wrap">
+          <button id="spin-cta" class="spin-cta" aria-label="Tap the steering wheel to spin">
+            <span class="pulse" aria-hidden="true"></span>
+            <!-- 3-spoke steering wheel -->
+            <svg class="steering-svg" viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <linearGradient id="rim-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                  <stop offset="100%" stop-color="#a0a8c0" stop-opacity="0.80" />
+                </linearGradient>
+                <radialGradient id="hub-grad" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ff5cd6" />
+                  <stop offset="100%" stop-color="#8c0060" />
+                </radialGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <!-- outer rim -->
+              <circle cx="100" cy="100" r="82" fill="none" stroke="url(#rim-grad)" stroke-width="13" filter="url(#glow)" />
+              <!-- inner rim accent -->
+              <circle cx="100" cy="100" r="82" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+              <!-- 3 spokes at 0°, 120°, 240° from top -->
+              <!-- top spoke: (100,78)→(100,18) -->
+              <line x1="100" y1="78" x2="100" y2="18" stroke="url(#rim-grad)" stroke-width="12" stroke-linecap="round" />
+              <!-- bottom-right spoke: hub(119,111)→rim(173,142) -->
+              <line x1="119" y1="111" x2="173" y2="142" stroke="url(#rim-grad)" stroke-width="12" stroke-linecap="round" />
+              <!-- bottom-left spoke: hub(81,111)→rim(27,142) -->
+              <line x1="81" y1="111" x2="27" y2="142" stroke="url(#rim-grad)" stroke-width="12" stroke-linecap="round" />
+              <!-- hub -->
+              <circle cx="100" cy="100" r="24" fill="url(#hub-grad)" />
+              <circle cx="100" cy="100" r="24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+              <circle cx="100" cy="100" r="7" fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </button>
+          <span class="spin-label">TAP TO SPIN</span>
+        </div>
       </div>
 
-      <p id="thanks-line" class="thanks">Thank you for riding with me — <strong id="welcome-driver">Juliano</strong></p>
-
-      <button id="spin-cta" class="spin-cta" aria-label="Tap the steering wheel to spin">
-        <span class="pulse" aria-hidden="true"></span>
-        <svg class="steering-svg" viewBox="0 0 200 200" aria-hidden="true">
-          <defs>
-            <radialGradient id="rim-grad" cx="50%" cy="40%" r="65%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
-              <stop offset="60%" stop-color="#cfd5ea" stop-opacity="0.55" />
-              <stop offset="100%" stop-color="#5a607a" stop-opacity="0.85" />
-            </radialGradient>
-            <radialGradient id="hub-grad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ff5cd6" />
-              <stop offset="100%" stop-color="#a30077" />
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="86" fill="none" stroke="url(#rim-grad)" stroke-width="14" />
-          <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="2" stroke-dasharray="2 4" opacity="0.3" />
-          <circle cx="100" cy="100" r="22" fill="url(#hub-grad)" />
-          <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-          <rect x="96" y="36"  width="8" height="42" rx="3" fill="url(#rim-grad)" />
-          <rect x="96" y="122" width="8" height="42" rx="3" fill="url(#rim-grad)" />
-          <rect x="36" y="96"  width="42" height="8" rx="3" fill="url(#rim-grad)" />
-          <rect x="122" y="96" width="42" height="8" rx="3" fill="url(#rim-grad)" />
-          <circle cx="100" cy="100" r="6" fill="#fff" opacity="0.9" />
-        </svg>
-        <span class="label">TAP TO SPIN</span>
-      </button>
-
-      <footer class="footer-tag">
+      <footer class="footer-tag home-footer">
         <span class="lyft-strip" id="footer-service">Lyft Premium XL · Bakersfield, CA</span>
         <span>One spin per rider · Show the prize to your driver</span>
       </footer>
@@ -94,12 +108,14 @@
           <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 400 400" aria-hidden="true"></svg>
           <div class="wheel-hub" aria-hidden="true">
             <svg viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="86" fill="none" stroke="#cfd5ea" stroke-width="10" opacity="0.85" />
-              <circle cx="100" cy="100" r="22" fill="#ff00bf" />
-              <rect x="96" y="36"  width="8" height="42" rx="3" fill="#cfd5ea" />
-              <rect x="96" y="122" width="8" height="42" rx="3" fill="#cfd5ea" />
-              <rect x="36" y="96"  width="42" height="8" rx="3" fill="#cfd5ea" />
-              <rect x="122" y="96" width="42" height="8" rx="3" fill="#cfd5ea" />
+              <!-- 3-spoke hub overlay on prize wheel -->
+              <circle cx="100" cy="100" r="82" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="8" />
+              <line x1="100" y1="78" x2="100" y2="18"   stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round"/>
+              <line x1="119" y1="111" x2="173" y2="142" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round"/>
+              <line x1="81"  y1="111" x2="27"  y2="142" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="26" fill="#ff00bf" />
+              <circle cx="100" cy="100" r="26" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <circle cx="100" cy="100" r="8"  fill="rgba(255,255,255,0.9)"/>
             </svg>
           </div>
         </div>
@@ -130,6 +146,9 @@
           </div>
           <p id="driver-greeting" class="driver-greeting">Thank you for riding</p>
         </div>
+
+        <button id="spin-again-btn" class="spin-again-btn" style="display:none">SPIN AGAIN</button>
+        <span id="demo-badge-result" class="demo-badge-inline" style="display:none">DEMO</span>
       </div>
 
       <footer class="footer-tag">

@@ -1,8 +1,13 @@
-import { fetchDriver, postSpin, postAdmin, getFingerprint, cacheResult, readCachedResult } from './api.js';
+import { fetchDriver, postSpin, postAdmin, getFingerprint, cacheResult, readCachedResult, isDemoMode, setDemoPrizes } from './api.js';
 import { renderWheel, spinTo, resetWheel } from './wheel.js';
 import { celebrateByTier } from './effects.js';
 
-const $ = (s, root = document) => root.querySelector(s);
+const _DUMMY = document.createElement('span');
+const $ = (s, root = document) => {
+  const el = root.querySelector(s);
+  if (!el) console.warn('[SpinWin] Missing element:', s);
+  return el || _DUMMY;
+};
 
 const state = {
   driverId: 'juliano',
@@ -63,15 +68,37 @@ function renderResult(result, driver, replay = false) {
   const t = result.won_at ? new Date(result.won_at) : new Date();
   $('#prize-meta').textContent = `WON · ${t.toLocaleString([], { hour: '2-digit', minute: '2-digit' })}`;
 
+  // Show/hide the "Spin Again" button in demo mode
+  const spinAgainBtn = $('#spin-again-btn');
+  if (spinAgainBtn) {
+    spinAgainBtn.style.display = isDemoMode() ? '' : 'none';
+  }
+
+  // Show/hide demo badge on result screen
+  const demoBadge = $('#demo-badge-result');
+  if (demoBadge) {
+    demoBadge.style.display = isDemoMode() ? '' : 'none';
+  }
+
   showScreen('screen-result');
   setTimeout(() => celebrateByTier(tier), 280);
 }
 
 async function loadDriver() {
-  const r = await fetchDriver(state.driverId);
-  if (!r || !r.ok) throw new Error('driver_not_found');
-  state.driver = r;
-  applyBranding(r);
+  try {
+    const r = await fetchDriver(state.driverId);
+    if (!r || !r.ok) {
+      console.warn('[SpinWin] fetchDriver returned invalid data, using mock');
+      throw new Error('driver_not_found');
+    }
+    state.driver = r;
+    setDemoPrizes(r.prizes);
+    applyBranding(r);
+    console.log('[SpinWin] Driver loaded successfully', isDemoMode() ? '(DEMO)' : '(LIVE)');
+  } catch (e) {
+    console.error('[SpinWin] loadDriver error:', e.message);
+    throw e;
+  }
 }
 
 async function startSpinFlow() {
@@ -115,6 +142,10 @@ async function startSpinFlow() {
     renderResult(res, state.driver, !!res.replay);
     state.spinning = false;
   }, duration + 250);
+}
+
+function goHome() {
+  showScreen('screen-home');
 }
 
 function bindAdmin() {
@@ -165,18 +196,39 @@ function bindAdmin() {
   });
 }
 
+function showDemoBanner() {
+  const banner = document.createElement('div');
+  banner.className = 'demo-banner';
+  banner.id = 'demo-banner';
+  banner.textContent = '⚡ DEMO MODE — No backend required';
+  document.querySelector('.app').appendChild(banner);
+}
+
 async function init() {
+  console.log('[SpinWin] Initializing…');
   state.driverId = readDriverId();
-  state.fingerprint = await getFingerprint();
+
+  try {
+    state.fingerprint = await getFingerprint();
+  } catch (e) {
+    console.warn('[SpinWin] Fingerprint failed, using fallback:', e.message);
+    state.fingerprint = 'demo_' + Math.random().toString(36).slice(2);
+  }
 
   try {
     await loadDriver();
   } catch (e) {
+    console.error('[SpinWin] loadDriver failed:', e.message);
     toast('Could not load driver config.');
     return;
   }
 
   renderWheel($('#wheel-svg'), state.driver.prizes);
+
+  // Show demo banner if in demo mode
+  if (isDemoMode()) {
+    showDemoBanner();
+  }
 
   const cached = readCachedResult(state.driverId);
   if (cached && cached.tier && cached.label) {
@@ -187,7 +239,14 @@ async function init() {
 
   $('#spin-cta').addEventListener('click', startSpinFlow);
 
+  // "Spin Again" button (demo mode only)
+  const spinAgainBtn = $('#spin-again-btn');
+  if (spinAgainBtn) {
+    spinAgainBtn.addEventListener('click', goHome);
+  }
+
   bindAdmin();
+  console.log('[SpinWin] Init complete ✓');
 }
 
 if (document.readyState === 'loading') {
