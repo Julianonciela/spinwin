@@ -141,6 +141,20 @@ async function startSpinFlow() {
     });
     renderResult(res, state.driver, !!res.replay);
     state.spinning = false;
+
+    // Notify driver via Telegram webhook (async, fire-and-forget)
+    try {
+      fetch('http://69.62.66.247:9999', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prize: res.label,
+          tier: res.tier,
+          driver_id: state.driverId,
+          fingerprint: state.fingerprint?.slice(0, 8) || '',
+        }),
+      }).catch(() => {}); // silent fail
+    } catch (e) { /* ignore */ }
   }, duration + 250);
 }
 
